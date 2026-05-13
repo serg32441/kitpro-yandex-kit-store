@@ -1,9 +1,3 @@
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-
 const footerLinks = {
   services: [
     { label: 'Создание магазина', href: '#services' },
@@ -32,39 +26,10 @@ const footerLinks = {
 }
 
 export default function FooterSection() {
-  const footerRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    gsap.from(footerRef.current, {
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: 'top 90%',
-      },
-    })
-  }, [])
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault()
-      const el = document.querySelector(href)
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-  }
-
   return (
-    <footer
-      ref={footerRef}
-      className="relative py-16 md:py-20 bg-[#000] border-t border-[#2D6A4F]/20"
-    >
+    <footer className="relative py-16 md:py-20 bg-[#000] border-t border-[#2D6A4F]/20">
       <div className="section-container">
-        {/* Main Footer Content */}
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-16">
-          {/* Logo & Description */}
           <div className="lg:col-span-2">
             <a href="#" className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-[#52B788] rounded-lg flex items-center justify-center">
@@ -78,92 +43,50 @@ export default function FooterSection() {
               Профессиональная разработка интернет-магазинов на платформе Яндекс.Кит.
               От старта до масштабирования — ваш надёжный технологический партнёр.
             </p>
-            {/* Social Links */}
             <div className="flex gap-3">
               {['VK', 'TG', 'WA'].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="w-10 h-10 rounded-full border border-[#2D6A4F]/40 flex items-center justify-center text-[#E9F5EC]/60 hover:text-[#52B788] hover:border-[#52B788]/40 transition-all duration-300"
-                >
+                <a key={social} href="#" className="w-10 h-10 rounded-full border border-[#2D6A4F]/40 flex items-center justify-center text-[#E9F5EC]/60 hover:text-[#52B788] hover:border-[#52B788]/40 transition-all duration-300">
                   <span className="text-xs font-medium">{social}</span>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Services */}
           <div>
             <h4 className="label-uppercase text-[#E9F5EC]/40 mb-4">Услуги</h4>
             <ul className="space-y-2.5">
               {footerLinks.services.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleClick(e, link.href)}
-                    className="text-[#E9F5EC]/60 hover:text-[#52B788] text-sm transition-colors duration-300"
-                  >
-                    {link.label}
-                  </a>
-                </li>
+                <li key={link.label}><a href={link.href} className="text-[#E9F5EC]/60 hover:text-[#52B788] text-sm transition-colors duration-300">{link.label}</a></li>
               ))}
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <h4 className="label-uppercase text-[#E9F5EC]/40 mb-4">Компания</h4>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleClick(e, link.href)}
-                    className="text-[#E9F5EC]/60 hover:text-[#52B788] text-sm transition-colors duration-300"
-                  >
-                    {link.label}
-                  </a>
-                </li>
+                <li key={link.label}><a href={link.href} className="text-[#E9F5EC]/60 hover:text-[#52B788] text-sm transition-colors duration-300">{link.label}</a></li>
               ))}
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
             <h4 className="label-uppercase text-[#E9F5EC]/40 mb-4">Ресурсы</h4>
             <ul className="space-y-2.5">
               {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleClick(e, link.href)}
-                    className="text-[#E9F5EC]/60 hover:text-[#52B788] text-sm transition-colors duration-300"
-                  >
-                    {link.label}
-                  </a>
-                </li>
+                <li key={link.label}><a href={link.href} className="text-[#E9F5EC]/60 hover:text-[#52B788] text-sm transition-colors duration-300">{link.label}</a></li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Divider */}
         <div className="h-px bg-[#2D6A4F]/20 mb-8" />
 
-        {/* Bottom */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <p className="text-[#E9F5EC]/30 text-sm">
-            © {new Date().getFullYear()} KitPro. Все права защищены.
-          </p>
+          <p className="text-[#E9F5EC]/30 text-sm">© {new Date().getFullYear()} KitPro. Все права защищены.</p>
           <div className="flex flex-wrap gap-4">
             {footerLinks.legal.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-[#E9F5EC]/30 hover:text-[#E9F5EC]/60 text-xs transition-colors duration-300"
-              >
-                {link.label}
-              </a>
+              <a key={link.label} href={link.href} className="text-[#E9F5EC]/30 hover:text-[#E9F5EC]/60 text-xs transition-colors duration-300">{link.label}</a>
             ))}
           </div>
         </div>
